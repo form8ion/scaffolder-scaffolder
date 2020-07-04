@@ -9,5 +9,5 @@ stubbedFs();
 // #### Execute
 
 (async () => {
-  await scaffold();
+  await scaffold({testing: {integration: true}});
 })();

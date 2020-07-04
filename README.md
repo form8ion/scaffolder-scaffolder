@@ -14,6 +14,8 @@ opinionated scaffolder for scaffolding [scaffolder plugins](https://github.com/f
 * [Usage](#usage)
   * [Installation](#installation)
   * [Example](#example)
+    * [Import](#import)
+    * [Execute](#execute)
 * [Contributing](#contributing)
   * [Dependencies](#dependencies)
   * [Verification](#verification)
@@ -46,7 +48,7 @@ import {scaffold} from '@form8ion/scaffolder-scaffolder';
 
 ```javascript
 (async () => {
-  await scaffold();
+  await scaffold({testing: {integration: true}});
 })();
 ```
 
