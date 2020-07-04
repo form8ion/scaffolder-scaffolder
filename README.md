@@ -36,8 +36,18 @@ $ npm install @form8ion/scaffolder-scaffolder --save-prod
 
 ### Example
 
+#### Import
+
 ```javascript
-import scaffolderScaffolder from '@form8ion/scaffolder-scaffolder';
+import {scaffold} from '@form8ion/scaffolder-scaffolder';
+```
+
+#### Execute
+
+```javascript
+(async () => {
+  await scaffold();
+})();
 ```
 
 ## Contributing
