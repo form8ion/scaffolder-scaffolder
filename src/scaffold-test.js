@@ -24,7 +24,7 @@ suite('scaffold', () => {
 
     assert.deepEqual(
       await scaffold({projectRoot, testing}),
-      deepmerge({devDependencies: [], scripts: {}}, integrationTestingResults)
+      deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults)
     );
   });
 });

@@ -15,6 +15,7 @@ Then('cucumber will be enabled', async function () {
   assert.deepEqual(scripts['pretest:integration'], 'preview');
   assert.isTrue(devDependencies.includes('cucumber'));
   assert.isTrue(devDependencies.includes('package-preview'));
+  assert.isTrue(devDependencies.includes('mock-fs'));
 });
 
 Then('cucumber will not be enabled', async function () {
