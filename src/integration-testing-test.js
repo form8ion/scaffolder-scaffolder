@@ -22,7 +22,7 @@ suite('integration tests', () => {
     cucumberScaffolder.scaffold.withArgs({projectRoot}).resolves(cucumberResults);
 
     assert.deepEqual(
-      await scaffold({projectRoot, testing: {integration: true}}),
+      await scaffold({projectRoot, tests: {integration: true}}),
       deepmerge({scripts: {'pretest:integration': 'preview'}, devDependencies: ['package-preview']}, cucumberResults)
     );
   });
@@ -30,6 +30,6 @@ suite('integration tests', () => {
   test('that the cucumber is not configured when the project should not be integration tested', async () => {
     cucumberScaffolder.scaffold.resolves({});
 
-    assert.deepEqual(await scaffold({testing: {integration: false}}), {});
+    assert.deepEqual(await scaffold({tests: {integration: false}}), {});
   });
 });

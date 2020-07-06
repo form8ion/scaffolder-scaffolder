@@ -18,12 +18,12 @@ suite('scaffold', () => {
 
   test('that the scaffolder is scaffolded', async () => {
     const integrationTestingResults = any.simpleObject();
-    const testing = {integration: any.boolean()};
+    const tests = {integration: any.boolean()};
     const projectRoot = any.string();
-    integrationTesting.default.withArgs({projectRoot, testing}).resolves(integrationTestingResults);
+    integrationTesting.default.withArgs({projectRoot, tests}).resolves(integrationTestingResults);
 
     assert.deepEqual(
-      await scaffold({projectRoot, testing}),
+      await scaffold({projectRoot, tests}),
       deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults)
     );
   });

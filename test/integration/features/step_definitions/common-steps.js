@@ -25,6 +25,6 @@ After(function () {
 When('the project is scaffolded', async function () {
   this.results = await scaffold({
     projectRoot: process.cwd(),
-    testing: {integration: this.integrationTesting}
+    tests: {integration: this.integrationTesting}
   });
 });
