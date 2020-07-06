@@ -19,10 +19,11 @@ suite('scaffold', () => {
   test('that the scaffolder is scaffolded', async () => {
     const integrationTestingResults = any.simpleObject();
     const testing = {integration: any.boolean()};
-    integrationTesting.default.withArgs({testing}).resolves(integrationTestingResults);
+    const projectRoot = any.string();
+    integrationTesting.default.withArgs({projectRoot, testing}).resolves(integrationTestingResults);
 
     assert.deepEqual(
-      await scaffold({testing}),
+      await scaffold({projectRoot, testing}),
       deepmerge({devDependencies: [], scripts: {}}, integrationTestingResults)
     );
   });
