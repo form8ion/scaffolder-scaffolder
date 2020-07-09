@@ -5,15 +5,35 @@ import {resolve} from 'path';
 import {After, Before, When} from 'cucumber';
 import stubbedFs from 'mock-fs';
 
+const packagePreviewDirectory = '../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder';
+
 Before(async function () {
   stubbedFs({
-    ['../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder/node_modules/.pnpm/'
-      + '@form8ion/cucumber-scaffolder@1.1.0/node_modules/@form8ion/cucumber-scaffolder/templates']: {
-      'cucumber.txt': await fs.readFile(resolve(
-        __dirname,
-        '../../../../',
-        'node_modules/@form8ion/cucumber-scaffolder/templates/cucumber.txt'
-      ))
+    [packagePreviewDirectory]: {
+      templates: {
+        'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js'))
+      },
+      node_modules: {
+        '.pnpm': {
+          '@form8ion': {
+            'cucumber-scaffolder@1.1.0': {
+              node_modules: {
+                '@form8ion': {
+                  'cucumber-scaffolder': {
+                    templates: {
+                      'cucumber.txt': await fs.readFile(resolve(
+                        __dirname,
+                        '../../../../',
+                        'node_modules/@form8ion/cucumber-scaffolder/templates/cucumber.txt'
+                      ))
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   });
 });

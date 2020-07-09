@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import any from '@travi/any';
 import deepmerge from 'deepmerge';
 import * as integrationTesting from './integration-testing';
+import * as documentation from './documentation';
 import scaffold from './scaffold';
 
 suite('scaffold', () => {
@@ -12,6 +13,7 @@ suite('scaffold', () => {
     sandbox = sinon.createSandbox();
 
     sandbox.stub(integrationTesting, 'default');
+    sandbox.stub(documentation, 'default');
   });
 
   teardown(() => sandbox.restore());
@@ -26,5 +28,6 @@ suite('scaffold', () => {
       await scaffold({projectRoot, tests}),
       deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults)
     );
+    assert.calledWith(documentation.default, {projectRoot});
   });
 });
