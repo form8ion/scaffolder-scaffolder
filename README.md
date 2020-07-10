@@ -14,6 +14,8 @@ opinionated scaffolder for scaffolding [scaffolder plugins](https://github.com/f
 * [Usage](#usage)
   * [Installation](#installation)
   * [Example](#example)
+    * [Import](#import)
+    * [Execute](#execute)
 * [Contributing](#contributing)
   * [Dependencies](#dependencies)
   * [Verification](#verification)
@@ -36,8 +38,18 @@ $ npm install @form8ion/scaffolder-scaffolder --save-prod
 
 ### Example
 
+#### Import
+
 ```javascript
-import scaffolderScaffolder from '@form8ion/scaffolder-scaffolder';
+import {scaffold} from '@form8ion/scaffolder-scaffolder';
+```
+
+#### Execute
+
+```javascript
+(async () => {
+  await scaffold({projectRoot: process.cwd(), testing: {integration: true}});
+})();
 ```
 
 ## Contributing
