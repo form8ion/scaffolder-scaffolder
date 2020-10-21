@@ -1,3 +1,5 @@
+import {promises as fs} from 'fs';
+import {fileExists} from '@form8ion/core';
 import {Given, Then} from 'cucumber';
 import {assert} from 'chai';
 
@@ -16,6 +18,10 @@ Then('cucumber will be enabled', async function () {
   assert.isTrue(devDependencies.includes('cucumber'));
   assert.isTrue(devDependencies.includes('package-preview'));
   assert.isTrue(devDependencies.includes('mock-fs'));
+  assert.equal(
+    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`),
+    ''
+  );
 });
 
 Then('cucumber will not be enabled', async function () {
@@ -24,4 +30,5 @@ Then('cucumber will not be enabled', async function () {
   assert.isUndefined(scripts['pretest:integration']);
   assert.isFalse(devDependencies.includes('cucumber'));
   assert.isFalse(devDependencies.includes('package-preview'));
+  assert.isFalse(await fileExists(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`));
 });
