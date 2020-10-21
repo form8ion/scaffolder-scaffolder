@@ -16,7 +16,7 @@ suite('integration tests', () => {
 
   teardown(() => sandbox.restore());
 
-  test('that the cucumber is configured when the project should be integration tested', async () => {
+  test('that cucumber is configured when the project should be integration tested', async () => {
     const projectRoot = any.string();
     const cucumberResults = any.simpleObject();
     cucumberScaffolder.scaffold.withArgs({projectRoot}).resolves(cucumberResults);

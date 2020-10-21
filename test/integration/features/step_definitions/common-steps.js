@@ -6,9 +6,12 @@ import {After, Before, When} from 'cucumber';
 import stubbedFs from 'mock-fs';
 
 const packagePreviewDirectory = '../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder';
+const pathToNodeModules = [__dirname, '../../../../', 'node_modules'];
+const stubbedNodeModules = stubbedFs.load(resolve(...pathToNodeModules));
 
 Before(async function () {
   stubbedFs({
+    node_modules: stubbedNodeModules,
     [packagePreviewDirectory]: {
       templates: {
         'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js'))
@@ -22,9 +25,8 @@ Before(async function () {
                   'cucumber-scaffolder': {
                     templates: {
                       'cucumber.txt': await fs.readFile(resolve(
-                        __dirname,
-                        '../../../../',
-                        'node_modules/@form8ion/cucumber-scaffolder/templates/cucumber.txt'
+                        ...pathToNodeModules,
+                        '@form8ion/cucumber-scaffolder/templates/cucumber.txt'
                       ))
                     }
                   }
