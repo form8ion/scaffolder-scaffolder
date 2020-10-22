@@ -1,9 +1,16 @@
+import {promises as fs} from 'fs';
 import deepmerge from 'deepmerge';
+import mkdir from '../thirdparty-wrappers/make-dir';
 import scaffoldIntegrationTesting from './integration-testing';
 import scaffoldDocumentation from './documentation';
 
 export default async function ({projectRoot, packageName, tests}) {
-  await scaffoldDocumentation({projectRoot});
+  const createdSrcDirectory = await mkdir(`${projectRoot}/src`);
+
+  await Promise.all([
+    scaffoldDocumentation({projectRoot}),
+    fs.writeFile(`${createdSrcDirectory}/index.js`, "export {default as scaffold} from './scaffold';\n")
+  ]);
 
   return deepmerge(
     {devDependencies: ['mock-fs'], scripts: {}},
