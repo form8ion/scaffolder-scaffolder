@@ -1,5 +1,5 @@
 import {resolve} from 'path';
-import {After, Then, When} from '@cucumber/cucumber';
+import {After, When} from '@cucumber/cucumber';
 import stubbedFs from 'mock-fs';
 
 const stubbedNodeModules = stubbedFs.load(resolve(__dirname, '..', '..', '..', '..', 'node_modules'));
