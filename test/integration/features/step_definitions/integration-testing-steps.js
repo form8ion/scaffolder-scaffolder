@@ -1,4 +1,6 @@
 import {promises as fs} from 'fs';
+import {resolve} from 'path';
+import mustache from 'mustache';
 import {fileExists} from '@form8ion/core';
 import {Given, Then} from 'cucumber';
 import {assert} from 'chai';
@@ -19,8 +21,11 @@ Then('cucumber will be enabled', async function () {
   assert.isTrue(devDependencies.includes('package-preview'));
   assert.isTrue(devDependencies.includes('mock-fs'));
   assert.equal(
-    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`),
-    ''
+    (await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`)).toString(),
+    mustache.render(
+      await fs.readFile(resolve(__dirname, '..', '..', '..', '..', 'templates', 'common-steps.mustache'), 'utf8'),
+      {packageName: this.packageName}
+    )
   );
 });
 

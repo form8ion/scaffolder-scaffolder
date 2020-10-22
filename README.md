@@ -48,7 +48,7 @@ import {scaffold} from '@form8ion/scaffolder-scaffolder';
 
 ```javascript
 (async () => {
-  await scaffold({projectRoot: process.cwd(), testing: {integration: true}});
+  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}});
 })();
 ```
 

@@ -3,6 +3,7 @@ import {scaffold} from '@form8ion/scaffolder-scaffolder';
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
 import {After, Before, When} from 'cucumber';
+import any from '@travi/any';
 import stubbedFs from 'mock-fs';
 
 const packagePreviewDirectory = '../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder';
@@ -11,10 +12,23 @@ const stubbedNodeModules = stubbedFs.load(resolve(...pathToNodeModules));
 
 Before(async function () {
   stubbedFs({
+    templates: {
+      'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
+      'common-steps.mustache': await fs.readFile(resolve(
+        __dirname,
+        '../../../../',
+        'templates/common-steps.mustache'
+      ))
+    },
     node_modules: stubbedNodeModules,
     [packagePreviewDirectory]: {
       templates: {
-        'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js'))
+        'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
+        'common-steps.mustache': await fs.readFile(resolve(
+          __dirname,
+          '../../../../',
+          'templates/common-steps.mustache'
+        ))
       },
       node_modules: {
         '.pnpm': {
@@ -45,8 +59,11 @@ After(function () {
 });
 
 When('the project is scaffolded', async function () {
+  this.packageName = any.word();
+
   this.results = await scaffold({
     projectRoot: process.cwd(),
+    packageName: this.packageName,
     tests: {integration: this.integrationTesting}
   });
 });

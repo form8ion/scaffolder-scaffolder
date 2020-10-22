@@ -22,10 +22,11 @@ suite('scaffold', () => {
     const integrationTestingResults = any.simpleObject();
     const tests = {integration: any.boolean()};
     const projectRoot = any.string();
-    integrationTesting.default.withArgs({projectRoot, tests}).resolves(integrationTestingResults);
+    const packageName = any.word();
+    integrationTesting.default.withArgs({projectRoot, packageName, tests}).resolves(integrationTestingResults);
 
     assert.deepEqual(
-      await scaffold({projectRoot, tests}),
+      await scaffold({projectRoot, tests, packageName}),
       deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults)
     );
     assert.calledWith(documentation.default, {projectRoot});

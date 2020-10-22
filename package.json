@@ -82,9 +82,10 @@
   "dependencies": {
     "@form8ion/cucumber-scaffolder": "1.4.0",
     "deepmerge": "^4.2.2",
-    "make-dir": "^3.1.0"
+    "make-dir": "^3.1.0",
+    "mustache": "^4.0.1"
   },
   "peerDependencies": {
-    "@travi/javascript-scaffolder": "^11.1.0"
+    "@travi/javascript-scaffolder": "^11.13.0"
   }
 }

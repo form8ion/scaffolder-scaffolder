@@ -9,5 +9,5 @@ stubbedFs();
 // #### Execute
 
 (async () => {
-  await scaffold({projectRoot: process.cwd(), tests: {integration: true}});
+  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}});
 })();

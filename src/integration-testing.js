@@ -1,18 +1,29 @@
 import {promises as fs} from 'fs';
+import {resolve} from 'path';
 import deepmerge from 'deepmerge';
+import mustache from 'mustache';
 import {scaffold as scaffoldCucumber} from '@form8ion/cucumber-scaffolder';
 import mkdir from '../thirdparty-wrappers/make-dir';
 
-export default async function ({projectRoot, tests: {integration}}) {
+export default async function ({projectRoot, packageName, tests: {integration}}) {
   if (integration) {
-    const createdFeaturesDirectory = await mkdir(`${projectRoot}/test/integration/features`);
+    const [cucumberResults, createdFeaturesDirectory] = await Promise.all([
+      scaffoldCucumber({projectRoot}),
+      mkdir(`${projectRoot}/test/integration/features`)
+    ]);
     const createdStepsDirectory = await mkdir(`${createdFeaturesDirectory}/step_definitions`);
 
-    await fs.writeFile(`${createdStepsDirectory}/common-steps.js`, '');
+    await fs.writeFile(
+      `${createdStepsDirectory}/common-steps.js`,
+      mustache.render(
+        await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
+        {packageName}
+      )
+    );
 
     return deepmerge(
-      {scripts: {'pretest:integration': 'preview'}, devDependencies: ['package-preview']},
-      await scaffoldCucumber({projectRoot})
+      {scripts: {'pretest:integration': 'preview'}, devDependencies: ['package-preview', 'mock-fs']},
+      cucumberResults
     );
   }
 
