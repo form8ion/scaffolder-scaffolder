@@ -13,13 +13,19 @@ export default async function ({projectRoot, packageName, tests: {integration}})
     ]);
     const createdStepsDirectory = await mkdir(`${createdFeaturesDirectory}/step_definitions`);
 
-    await fs.writeFile(
-      `${createdStepsDirectory}/common-steps.js`,
-      mustache.render(
-        await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
-        {packageName}
+    await Promise.all([
+      fs.writeFile(
+        `${createdStepsDirectory}/common-steps.js`,
+        mustache.render(
+          await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
+          {packageName}
+        )
+      ),
+      fs.copyFile(
+        resolve(__dirname, '..', 'templates', 'scaffolder.feature'),
+        `${createdFeaturesDirectory}/scaffolder.feature`
       )
-    );
+    ]);
 
     return deepmerge(
       {scripts: {'pretest:integration': 'preview'}, devDependencies: ['package-preview', 'mock-fs']},

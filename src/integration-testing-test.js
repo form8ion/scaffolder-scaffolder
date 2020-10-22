@@ -17,6 +17,7 @@ suite('integration tests', () => {
 
     sandbox.stub(cucumberScaffolder, 'scaffold');
     sandbox.stub(fs, 'writeFile');
+    sandbox.stub(fs, 'copyFile');
     sandbox.stub(fs, 'readFile');
     sandbox.stub(mkdir, 'default');
     sandbox.stub(mustache, 'render');
@@ -48,6 +49,11 @@ suite('integration tests', () => {
       )
     );
     assert.calledWith(fs.writeFile, `${pathToCreatedStepsDirectory}/common-steps.js`, commonStepsContent);
+    assert.calledWith(
+      fs.copyFile,
+      resolve(__dirname, '..', 'templates', 'scaffolder.feature'),
+      `${pathToCreatedFeaturesDirectory}/scaffolder.feature`
+    );
   });
 
   test('that the cucumber is not configured when the project should not be integration tested', async () => {

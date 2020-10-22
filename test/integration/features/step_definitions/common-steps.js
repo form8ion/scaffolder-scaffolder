@@ -11,25 +11,21 @@ const pathToNodeModules = [__dirname, '../../../../', 'node_modules'];
 const stubbedNodeModules = stubbedFs.load(resolve(...pathToNodeModules));
 
 Before(async function () {
+  const templates = {
+    'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
+    'common-steps.mustache': await fs.readFile(resolve(
+      __dirname,
+      '../../../../',
+      'templates/common-steps.mustache'
+    )),
+    'scaffolder.feature': await fs.readFile(resolve(__dirname, '../../../../', 'templates/scaffolder.feature'))
+  };
+
   stubbedFs({
-    templates: {
-      'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
-      'common-steps.mustache': await fs.readFile(resolve(
-        __dirname,
-        '../../../../',
-        'templates/common-steps.mustache'
-      ))
-    },
+    templates,
     node_modules: stubbedNodeModules,
     [packagePreviewDirectory]: {
-      templates: {
-        'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
-        'common-steps.mustache': await fs.readFile(resolve(
-          __dirname,
-          '../../../../',
-          'templates/common-steps.mustache'
-        ))
-      },
+      templates,
       node_modules: {
         '.pnpm': {
           '@form8ion': {
