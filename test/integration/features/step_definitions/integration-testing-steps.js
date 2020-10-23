@@ -1,6 +1,5 @@
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
-import mustache from 'mustache';
 import {fileExists} from '@form8ion/core';
 import {Given, Then} from 'cucumber';
 import {assert} from 'chai';
@@ -14,6 +13,8 @@ Given('the scaffolded project will not be integration tested', async function ()
 });
 
 Then('cucumber will be enabled', async function () {
+  const pathToTemplates = [__dirname, '..', '..', '..', '..', 'templates'];
+
   const {scripts, devDependencies} = this.results;
 
   assert.deepEqual(scripts['pretest:integration'], 'preview');
@@ -22,14 +23,12 @@ Then('cucumber will be enabled', async function () {
   assert.isTrue(devDependencies.includes('mock-fs'));
   assert.equal(
     (await fs.readFile(`${process.cwd()}/test/integration/features/scaffolder.feature`)).toString(),
-    await fs.readFile(resolve(__dirname, '..', '..', '..', '..', 'templates', 'scaffolder.feature'), 'utf8')
+    await fs.readFile(resolve(...pathToTemplates, 'scaffolder.feature'), 'utf8')
   );
   assert.equal(
     (await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`)).toString(),
-    mustache.render(
-      await fs.readFile(resolve(__dirname, '..', '..', '..', '..', 'templates', 'common-steps.mustache'), 'utf8'),
-      {packageName: this.packageName}
-    )
+    (await fs.readFile(resolve(...pathToTemplates, 'common-steps.mustache'), 'utf8'))
+      .replace('{{{ packageName }}}', this.packageName)
   );
 });
 

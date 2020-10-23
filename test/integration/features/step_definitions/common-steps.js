@@ -55,7 +55,7 @@ After(function () {
 });
 
 When('the project is scaffolded', async function () {
-  this.packageName = any.word();
+  this.packageName = `@${any.word()}/${any.word()}-${any.word()}`;
 
   this.results = await scaffold({
     projectRoot: process.cwd(),
