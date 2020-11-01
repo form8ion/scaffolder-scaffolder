@@ -1,4 +1,5 @@
 import {promises as fs} from 'fs';
+import {resolve} from 'path';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
@@ -17,6 +18,7 @@ suite('scaffold', () => {
     sandbox.stub(integrationTesting, 'default');
     sandbox.stub(documentation, 'default');
     sandbox.stub(fs, 'writeFile');
+    sandbox.stub(fs, 'copyFile');
     sandbox.stub(mkdir, 'default');
   });
 
@@ -39,6 +41,11 @@ suite('scaffold', () => {
     assert.calledWith(
       fs.writeFile,
       `${pathToCreatedSrcDirectory}/index.js`, "export {default as scaffold} from './scaffold';\n"
+    );
+    assert.calledWith(
+      fs.copyFile,
+      resolve(__dirname, '..', 'templates', 'scaffold.js'),
+      `${pathToCreatedSrcDirectory}/scaffold.js`
     );
   });
 });

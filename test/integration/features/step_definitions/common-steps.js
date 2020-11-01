@@ -13,6 +13,7 @@ const stubbedNodeModules = stubbedFs.load(resolve(...pathToNodeModules));
 Before(async function () {
   const templates = {
     'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
+    'scaffold.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/scaffold.js')),
     'common-steps.mustache': await fs.readFile(resolve(
       __dirname,
       '../../../../',
