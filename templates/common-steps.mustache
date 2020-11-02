@@ -10,8 +10,7 @@ After(function () {
 
 When('the project is scaffolded', async function () {
   // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
-  const scaffolder = require('{{{ packageName }}}');
-  const {scaffold} = scaffolder;
+  const {scaffold} = require('{{{ packageName }}}');
 
   stubbedFs({
     node_modules: stubbedNodeModules
