@@ -29,17 +29,15 @@ Before(async function () {
       templates,
       node_modules: {
         '.pnpm': {
-          '@form8ion': {
-            'cucumber-scaffolder@1.4.0': {
-              node_modules: {
-                '@form8ion': {
-                  'cucumber-scaffolder': {
-                    templates: {
-                      'cucumber.txt': await fs.readFile(resolve(
-                        ...pathToNodeModules,
-                        '@form8ion/cucumber-scaffolder/templates/cucumber.txt'
-                      ))
-                    }
+          '@form8ion+cucumber-scaffolder@1.4.0': {
+            node_modules: {
+              '@form8ion': {
+                'cucumber-scaffolder': {
+                  templates: {
+                    'cucumber.txt': await fs.readFile(resolve(
+                      ...pathToNodeModules,
+                      '@form8ion/cucumber-scaffolder/templates/cucumber.txt'
+                    ))
                   }
                 }
               }
