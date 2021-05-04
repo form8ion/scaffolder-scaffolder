@@ -29,7 +29,7 @@ Before(async function () {
       templates,
       node_modules: {
         '.pnpm': {
-          '@form8ion+cucumber-scaffolder@1.4.0': {
+          '@form8ion+cucumber-scaffolder@1.5.0': {
             node_modules: {
               '@form8ion': {
                 'cucumber-scaffolder': {
