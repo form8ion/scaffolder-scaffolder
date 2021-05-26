@@ -40,12 +40,12 @@ suite('scaffold', () => {
     assert.calledWith(documentation.default, {projectRoot});
     assert.calledWith(
       fs.writeFile,
-      `${pathToCreatedSrcDirectory}/index.js`, "export {default as scaffold} from './scaffold';\n"
+      `${pathToCreatedSrcDirectory}/index.js`, "export {default as scaffold} from './scaffolder';\n"
     );
     assert.calledWith(
       fs.copyFile,
-      resolve(__dirname, '..', 'templates', 'scaffold.js'),
-      `${pathToCreatedSrcDirectory}/scaffold.js`
+      resolve(__dirname, '..', 'templates', 'scaffolder.js'),
+      `${pathToCreatedSrcDirectory}/scaffolder.js`
     );
   });
 });

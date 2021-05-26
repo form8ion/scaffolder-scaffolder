@@ -10,8 +10,8 @@ export default async function ({projectRoot, packageName, tests}) {
 
   await Promise.all([
     scaffoldDocumentation({projectRoot}),
-    fs.writeFile(`${createdSrcDirectory}/index.js`, "export {default as scaffold} from './scaffold';\n"),
-    fs.copyFile(resolve(__dirname, '..', 'templates', 'scaffold.js'), `${createdSrcDirectory}/scaffold.js`)
+    fs.writeFile(`${createdSrcDirectory}/index.js`, "export {default as scaffold} from './scaffolder';\n"),
+    fs.copyFile(resolve(__dirname, '..', 'templates', 'scaffolder.js'), `${createdSrcDirectory}/scaffolder.js`)
   ]);
 
   return deepmerge(
