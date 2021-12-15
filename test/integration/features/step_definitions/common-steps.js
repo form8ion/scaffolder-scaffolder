@@ -2,7 +2,7 @@
 import {scaffold} from '@form8ion/scaffolder-scaffolder';
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
-import {After, Before, When} from 'cucumber';
+import {After, Before, When} from '@cucumber/cucumber';
 import any from '@travi/any';
 import stubbedFs from 'mock-fs';
 
