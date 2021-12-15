@@ -1,7 +1,7 @@
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
 import {fileExists} from '@form8ion/core';
-import {Given, Then} from 'cucumber';
+import {Given, Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
 
 Given('the scaffolded project will be integration tested', async function () {

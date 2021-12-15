@@ -1,6 +1,6 @@
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
-import {Then} from 'cucumber';
+import {Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
 
 Then('the manifest file is generated', async function () {
