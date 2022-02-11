@@ -44,7 +44,7 @@ suite('integration tests', () => {
     assert.deepEqual(
       await scaffold({projectRoot, packageName, tests: {integration: true}}),
       deepmerge(
-        {scripts: {'pretest:integration': 'preview'}, devDependencies: ['package-preview', 'mock-fs']},
+        {scripts: {'pretest:integration:base': 'preview'}, devDependencies: ['package-preview', 'mock-fs']},
         cucumberResults
       )
     );
