@@ -17,9 +17,8 @@ Then('cucumber will be enabled', async function () {
 
   const {scripts, devDependencies} = this.results;
 
-  assert.deepEqual(scripts['pretest:integration:base'], 'preview');
+  assert.deepEqual(scripts['pretest:integration:base'], 'run-s build');
   assert.isTrue(devDependencies.includes('@cucumber/cucumber'));
-  assert.isTrue(devDependencies.includes('package-preview'));
   assert.isTrue(devDependencies.includes('mock-fs'));
   assert.equal(
     (await fs.readFile(`${process.cwd()}/test/integration/features/scaffolder.feature`)).toString(),
