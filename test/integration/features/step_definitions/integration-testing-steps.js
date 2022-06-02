@@ -21,11 +21,11 @@ Then('cucumber will be enabled', async function () {
   assert.isTrue(devDependencies.includes('@cucumber/cucumber'));
   assert.isTrue(devDependencies.includes('mock-fs'));
   assert.equal(
-    (await fs.readFile(`${process.cwd()}/test/integration/features/scaffolder.feature`)).toString(),
+    await fs.readFile(`${process.cwd()}/test/integration/features/scaffolder.feature`, 'utf-8'),
     await fs.readFile(resolve(...pathToTemplates, 'scaffolder.feature'), 'utf8')
   );
   assert.equal(
-    (await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`)).toString(),
+    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`, 'utf-8'),
     (await fs.readFile(resolve(...pathToTemplates, 'common-steps.mustache'), 'utf8'))
       .replace('{{{ packageName }}}', this.packageName)
   );
