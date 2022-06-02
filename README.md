@@ -27,6 +27,7 @@ opinionated scaffolder for scaffolding [scaffolder plugins](https://github.com/f
 [![MIT license][license-badge]][license-link]
 [![npm][npm-badge]][npm-link]
 [![Try @form8ion/scaffolder-scaffolder on RunKit][runkit-badge]][runkit-link]
+![node][node-badge]
 
 <!--consumer-badges end -->
 
@@ -116,3 +117,5 @@ $ npm test
 [github-actions-ci-link]: https://github.com/form8ion/scaffolder-scaffolder/actions?query=workflow%3A%22Node.js+CI%22+branch%3Amaster
 
 [github-actions-ci-badge]: https://github.com/form8ion/scaffolder-scaffolder/workflows/Node.js%20CI/badge.svg
+
+[node-badge]: https://img.shields.io/node/v/@form8ion/scaffolder-scaffolder?logo=node.js
