@@ -1,9 +1,14 @@
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
+
 import deepmerge from 'deepmerge';
 import mustache from 'mustache';
+import filedirname from 'filedirname';
 import {scaffold as scaffoldCucumber} from '@form8ion/cucumber-scaffolder';
+
 import mkdir from '../thirdparty-wrappers/make-dir';
+
+const [, __dirname] = filedirname();
 
 export default async function ({projectRoot, packageName, tests: {integration}}) {
   if (integration) {

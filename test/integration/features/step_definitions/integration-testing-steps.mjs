@@ -1,8 +1,12 @@
-import {promises as fs} from 'fs';
-import {resolve} from 'path';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {promises as fs} from 'node:fs';
+
 import {fileExists} from '@form8ion/core';
 import {Given, Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 Given('the scaffolded project will be integration tested', async function () {
   this.integrationTesting = true;

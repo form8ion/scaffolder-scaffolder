@@ -1,12 +1,15 @@
+import {promises as fs} from 'node:fs';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+
 // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
 import {scaffold} from '@form8ion/scaffolder-scaffolder';
-import {promises as fs} from 'fs';
-import {resolve} from 'path';
 import {After, Before, When} from '@cucumber/cucumber';
 import any from '@travi/any';
 import stubbedFs from 'mock-fs';
 
 const packagePreviewDirectory = '../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const pathToNodeModules = [__dirname, '../../../../', 'node_modules'];
 const stubbedNodeModules = stubbedFs.load(resolve(...pathToNodeModules));
 

@@ -1,9 +1,14 @@
 import {promises as fs} from 'fs';
 import {resolve} from 'path';
+
 import deepmerge from 'deepmerge';
+import filedirname from 'filedirname';
+
 import mkdir from '../thirdparty-wrappers/make-dir';
 import scaffoldIntegrationTesting from './integration-testing';
 import scaffoldDocumentation from './documentation';
+
+const [, __dirname] = filedirname();
 
 export default async function ({projectRoot, packageName, tests}) {
   const createdSrcDirectory = await mkdir(`${projectRoot}/src`);

@@ -1,7 +1,11 @@
-import {promises as fs} from 'fs';
-import {resolve} from 'path';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {promises as fs} from 'node:fs';
+
 import {Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 Then('the manifest file is generated', async function () {
   assert.equal(
