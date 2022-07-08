@@ -10,10 +10,12 @@ import stubbedFs from 'mock-fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pathToProjectRoot = [__dirname, '../../../../'];
+
 Before(async function () {
   stubbedFs({
     templates: stubbedFs.load(resolve(...pathToProjectRoot, 'templates')),
     node_modules: stubbedFs.load(resolve(...pathToProjectRoot, 'node_modules')),
+    'package.json': JSON.stringify({})
   });
 });
 
