@@ -8,7 +8,6 @@ import {After, Before, When} from '@cucumber/cucumber';
 import any from '@travi/any';
 import stubbedFs from 'mock-fs';
 
-const packagePreviewDirectory = '../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pathToProjectRoot = [__dirname, '../../../../'];
 Before(async function () {
