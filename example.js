@@ -4,10 +4,11 @@ import {resolve} from 'path';
 import stubbedFs from 'mock-fs';
 import {scaffold} from './lib/index.js';
 
-// remark-usage-ignore-next 4
+// remark-usage-ignore-next 5
 stubbedFs({
   node_modules: stubbedFs.load(resolve(...[__dirname, 'node_modules'])),
-  templates: stubbedFs.load(resolve(...[__dirname, 'templates']))
+  templates: stubbedFs.load(resolve(...[__dirname, 'templates'])),
+  'package.json': JSON.stringify({})
 });
 
 // #### Execute
