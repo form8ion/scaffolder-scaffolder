@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "0.0.0-semantically-released",
   "engines": {
-    "node": "^14.15 || >=16"
+    "node": "^14.18 || >=16"
   },
   "files": [
     "example.js",
@@ -32,7 +32,7 @@
     "lint:js": "eslint . --cache",
     "lint:md": "remark . --frail",
     "generate:md": "remark . --output",
-    "pregenerate:md": "npm run build",
+    "pregenerate:md": "run-s build",
     "lint:sensitive": "ban",
     "clean": "rimraf ./lib",
     "prebuild": "run-s clean",
