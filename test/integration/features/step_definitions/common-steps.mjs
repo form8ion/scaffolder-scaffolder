@@ -10,45 +10,11 @@ import stubbedFs from 'mock-fs';
 
 const packagePreviewDirectory = '../__package_previews__/scaffolder-scaffolder/@form8ion/scaffolder-scaffolder';
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const pathToNodeModules = [__dirname, '../../../../', 'node_modules'];
-const stubbedNodeModules = stubbedFs.load(resolve(...pathToNodeModules));
-
+const pathToProjectRoot = [__dirname, '../../../../'];
 Before(async function () {
-  const templates = {
-    'example.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/example.js')),
-    'scaffolder.js': await fs.readFile(resolve(__dirname, '../../../../', 'templates/scaffolder.js')),
-    'common-steps.mustache': await fs.readFile(resolve(
-      __dirname,
-      '../../../../',
-      'templates/common-steps.mustache'
-    )),
-    'scaffolder.feature': await fs.readFile(resolve(__dirname, '../../../../', 'templates/scaffolder.feature'))
-  };
-
   stubbedFs({
-    templates,
-    node_modules: stubbedNodeModules,
-    [packagePreviewDirectory]: {
-      templates,
-      node_modules: {
-        '.pnpm': {
-          '@form8ion+cucumber-scaffolder@1.5.0': {
-            node_modules: {
-              '@form8ion': {
-                'cucumber-scaffolder': {
-                  templates: {
-                    'cucumber.txt': await fs.readFile(resolve(
-                      ...pathToNodeModules,
-                      '@form8ion/cucumber-scaffolder/templates/cucumber.txt'
-                    ))
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    templates: stubbedFs.load(resolve(...pathToProjectRoot, 'templates')),
+    node_modules: stubbedFs.load(resolve(...pathToProjectRoot, 'node_modules')),
   });
 });
 
