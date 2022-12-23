@@ -48,7 +48,7 @@ suite('integration tests', () => {
         cucumberResults
       )
     );
-    assert.calledWith(fs.writeFile, `${pathToCreatedStepsDirectory}/common-steps.js`, commonStepsContent);
+    assert.calledWith(fs.writeFile, `${pathToCreatedStepsDirectory}/common-steps.mjs`, commonStepsContent);
     assert.calledWith(
       fs.copyFile,
       resolve(__dirname, '..', 'templates', 'scaffolder.feature'),

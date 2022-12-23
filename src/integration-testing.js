@@ -20,7 +20,7 @@ export default async function ({projectRoot, packageName, tests: {integration}})
 
     await Promise.all([
       fs.writeFile(
-        `${createdStepsDirectory}/common-steps.js`,
+        `${createdStepsDirectory}/common-steps.mjs`,
         mustache.render(
           await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
           {packageName}

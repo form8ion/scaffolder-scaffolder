@@ -29,7 +29,7 @@ Then('cucumber will be enabled', async function () {
     await fs.readFile(resolve(...pathToTemplates, 'scaffolder.feature'), 'utf8')
   );
   assert.equal(
-    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`, 'utf-8'),
+    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.mjs`, 'utf-8'),
     (await fs.readFile(resolve(...pathToTemplates, 'common-steps.mustache'), 'utf8'))
       .replace('{{{ packageName }}}', this.packageName)
   );
