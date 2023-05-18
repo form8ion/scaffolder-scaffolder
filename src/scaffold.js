@@ -1,4 +1,4 @@
-import {promises as fs} from 'fs';
+import {promises as fs} from 'node:fs';
 import {resolve} from 'path';
 
 import deepmerge from 'deepmerge';
