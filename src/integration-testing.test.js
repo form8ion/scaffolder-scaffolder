@@ -2,19 +2,19 @@ import {promises as fs} from 'node:fs';
 import {resolve} from 'node:path';
 import deepmerge from 'deepmerge';
 import mustache from 'mustache';
+import * as mkdir from 'make-dir';
 import * as cucumberScaffolder from '@form8ion/cucumber-scaffolder';
 
 import {describe, it, expect, vi, afterEach} from 'vitest';
 import any from '@travi/any';
 import {when} from 'jest-when';
 
-import * as mkdir from '../thirdparty-wrappers/make-dir';
-import scaffold from './integration-testing';
+import scaffold from './integration-testing.js';
 
 vi.mock('node:fs');
 vi.mock('mustache');
 vi.mock('@form8ion/cucumber-scaffolder');
-vi.mock('../thirdparty-wrappers/make-dir');
+vi.mock('make-dir');
 
 describe('integration tests', () => {
   afterEach(() => {

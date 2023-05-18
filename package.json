@@ -3,6 +3,7 @@
   "description": "opinionated scaffolder for scaffolding scaffolder plugins",
   "license": "MIT",
   "version": "0.0.0-semantically-released",
+  "type": "module",
   "engines": {
     "node": "^16.14 || >=18"
   },
@@ -11,12 +12,8 @@
   "bugs": "https://github.com/form8ion/scaffolder-scaffolder/issues",
   "homepage": "https://npm.im/@form8ion/scaffolder-scaffolder",
   "runkitExampleFilename": "./example.js",
-  "exports": {
-    "require": "./lib/index.js",
-    "import": "./lib/index.mjs"
-  },
-  "main": "./lib/index.js",
-  "module": "./lib/index.mjs",
+  "exports": "./lib/index.mjs",
+  "main": "./lib/index.mjs",
   "sideEffects": false,
   "scripts": {
     "test": "npm-run-all --print-label build --parallel lint:* --parallel test:*",
@@ -26,6 +23,7 @@
     "generate:md": "remark . --output",
     "pregenerate:md": "run-s build",
     "lint:sensitive": "ban",
+    "lint:publish": "publint",
     "clean": "rimraf ./lib",
     "prebuild": "run-s clean",
     "build": "npm-run-all --print-label --parallel build:*",
@@ -62,9 +60,7 @@
     "mustache": "^4.0.1"
   },
   "devDependencies": {
-    "@babel/register": "7.21.0",
     "@cucumber/cucumber": "9.1.2",
-    "@form8ion/babel-preset": "1.6.100",
     "@form8ion/commitlint-config": "1.0.50",
     "@form8ion/core": "2.0.0",
     "@form8ion/eslint-config": "5.0.31",
@@ -84,6 +80,7 @@
     "ls-engines": "0.9.0",
     "mock-fs": "5.2.0",
     "npm-run-all": "4.1.5",
+    "publint": "0.1.11",
     "remark-cli": "11.0.0",
     "remark-toc": "8.0.1",
     "remark-usage": "10.0.1",

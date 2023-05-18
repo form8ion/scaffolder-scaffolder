@@ -4,7 +4,7 @@ import {resolve} from 'node:path';
 import {describe, it, expect, vi, afterEach} from 'vitest';
 import any from '@travi/any';
 
-import scaffoldDocumentation from './documentation';
+import scaffoldDocumentation from './documentation.js';
 
 vi.mock('node:fs');
 

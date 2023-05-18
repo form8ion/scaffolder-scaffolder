@@ -1,12 +1,12 @@
 import {promises as fs} from 'node:fs';
-import {resolve} from 'path';
+import {resolve} from 'node:path';
 
+import mkdir from 'make-dir';
 import deepmerge from 'deepmerge';
 import filedirname from 'filedirname';
 
-import mkdir from '../thirdparty-wrappers/make-dir';
-import scaffoldIntegrationTesting from './integration-testing';
-import scaffoldDocumentation from './documentation';
+import scaffoldIntegrationTesting from './integration-testing.js';
+import scaffoldDocumentation from './documentation.js';
 
 const [, __dirname] = filedirname();
 

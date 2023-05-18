@@ -6,7 +6,7 @@ import {fileExists} from '@form8ion/core';
 import {Given, Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));      // eslint-disable-line no-underscore-dangle
 
 Given('the scaffolded project will be integration tested', async function () {
   this.integrationTesting = true;

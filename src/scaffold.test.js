@@ -1,15 +1,15 @@
 import deepmerge from 'deepmerge';
+import * as mkdir from 'make-dir';
 
 import {describe, it, expect, vi, afterEach} from 'vitest';
 import any from '@travi/any';
 import {when} from 'jest-when';
 
-import * as mkdir from '../thirdparty-wrappers/make-dir';
-import * as integrationTesting from './integration-testing';
-import scaffold from './scaffold';
+import * as integrationTesting from './integration-testing.js';
+import scaffold from './scaffold.js';
 
 vi.mock('node:fs');
-vi.mock('../thirdparty-wrappers/make-dir');
+vi.mock('make-dir');
 vi.mock('./integration-testing');
 
 describe('scaffold', () => {
