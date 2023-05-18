@@ -1,12 +1,11 @@
-import {promises as fs} from 'fs';
-import {resolve} from 'path';
+import {promises as fs} from 'node:fs';
+import {resolve} from 'node:path';
 
+import mkdir from 'make-dir';
 import deepmerge from 'deepmerge';
 import mustache from 'mustache';
 import filedirname from 'filedirname';
 import {scaffold as scaffoldCucumber} from '@form8ion/cucumber-scaffolder';
-
-import mkdir from '../thirdparty-wrappers/make-dir';
 
 const [, __dirname] = filedirname();
 

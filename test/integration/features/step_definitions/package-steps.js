@@ -5,7 +5,7 @@ import {promises as fs} from 'node:fs';
 import {Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));        // eslint-disable-line no-underscore-dangle
 
 Then('the manifest file is generated', async function () {
   assert.equal(

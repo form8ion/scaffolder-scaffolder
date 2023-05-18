@@ -3,20 +3,17 @@
   "description": "opinionated scaffolder for scaffolding scaffolder plugins",
   "license": "MIT",
   "version": "0.0.0-semantically-released",
+  "type": "module",
   "engines": {
-    "node": "^14.18 || >=16"
+    "node": "^16.14 || >=18"
   },
   "author": "Matt Travi <npm@travi.org> (https://matt.travi.org/)",
   "repository": "form8ion/scaffolder-scaffolder",
   "bugs": "https://github.com/form8ion/scaffolder-scaffolder/issues",
   "homepage": "https://npm.im/@form8ion/scaffolder-scaffolder",
   "runkitExampleFilename": "./example.js",
-  "exports": {
-    "require": "./lib/index.js",
-    "import": "./lib/index.mjs"
-  },
-  "main": "./lib/index.js",
-  "module": "./lib/index.mjs",
+  "exports": "./lib/index.mjs",
+  "main": "./lib/index.mjs",
   "sideEffects": false,
   "scripts": {
     "test": "npm-run-all --print-label build --parallel lint:* --parallel test:*",
@@ -26,6 +23,7 @@
     "generate:md": "remark . --output",
     "pregenerate:md": "run-s build",
     "lint:sensitive": "ban",
+    "lint:publish": "publint",
     "clean": "rimraf ./lib",
     "prebuild": "run-s clean",
     "build": "npm-run-all --print-label --parallel build:*",
@@ -33,7 +31,7 @@
     "watch": "run-s 'build:js -- --watch'",
     "prepack": "run-s build",
     "test:unit": "cross-env NODE_ENV=test c8 run-s test:unit:base",
-    "test:unit:base": "DEBUG=any mocha 'src/**/*-test.js'",
+    "test:unit:base": "DEBUG=any vitest run",
     "lint:peer": "npm ls >/dev/null",
     "lint:gherkin": "gherkin-lint",
     "pretest:integration": "run-s build",
@@ -62,14 +60,11 @@
     "mustache": "^4.0.1"
   },
   "devDependencies": {
-    "@babel/register": "7.21.0",
     "@cucumber/cucumber": "9.1.2",
-    "@form8ion/babel-preset": "1.6.100",
     "@form8ion/commitlint-config": "1.0.50",
     "@form8ion/core": "2.0.0",
     "@form8ion/eslint-config": "5.0.31",
     "@form8ion/eslint-config-cucumber": "1.4.1",
-    "@form8ion/eslint-config-mocha": "2.0.3",
     "@form8ion/javascript": "10.6.3",
     "@form8ion/remark-lint-preset": "5.0.9",
     "@travi/any": "2.1.8",
@@ -80,18 +75,19 @@
     "cz-conventional-changelog": "3.3.0",
     "gherkin-lint": "4.2.2",
     "husky": "8.0.3",
+    "jest-when": "3.5.2",
     "lockfile-lint": "4.10.1",
     "ls-engines": "0.9.0",
-    "mocha": "10.2.0",
     "mock-fs": "5.2.0",
     "npm-run-all": "4.1.5",
+    "publint": "0.1.11",
     "remark-cli": "11.0.0",
     "remark-toc": "8.0.1",
     "remark-usage": "10.0.1",
     "rimraf": "5.0.0",
     "rollup": "2.79.1",
     "rollup-plugin-auto-external": "2.0.0",
-    "sinon": "15.0.4"
+    "vitest": "0.31.0"
   },
   "peerDependencies": {
     "@form8ion/javascript": ">=5.1.0"
