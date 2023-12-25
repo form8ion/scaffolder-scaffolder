@@ -15,7 +15,7 @@ export default async function ({projectRoot, packageName, tests}) {
 
   await Promise.all([
     scaffoldDocumentation({projectRoot}),
-    fs.writeFile(`${createdSrcDirectory}/index.js`, "export {default as scaffold} from './scaffolder';\n"),
+    fs.writeFile(`${createdSrcDirectory}/index.js`, "export {default as scaffold} from './scaffolder.js';\n"),
     fs.copyFile(resolve(__dirname, '..', 'templates', 'scaffolder.js'), `${createdSrcDirectory}/scaffolder.js`)
   ]);
 

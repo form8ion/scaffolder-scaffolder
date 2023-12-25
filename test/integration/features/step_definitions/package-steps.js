@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));        // eslint-disa
 Then('the manifest file is generated', async function () {
   assert.equal(
     await fs.readFile(`${process.cwd()}/src/index.js`, 'utf-8'),
-    "export {default as scaffold} from './scaffolder';\n"
+    "export {default as scaffold} from './scaffolder.js';\n"
   );
   assert.equal(
     await fs.readFile(`${process.cwd()}/src/scaffolder.js`, 'utf-8'),

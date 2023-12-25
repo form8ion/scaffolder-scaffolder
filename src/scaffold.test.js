@@ -1,3 +1,5 @@
+import {promises as fs} from 'node:fs';
+import {resolve} from 'node:path';
 import deepmerge from 'deepmerge';
 import * as mkdir from 'make-dir';
 
@@ -30,5 +32,13 @@ describe('scaffold', () => {
 
     expect(await scaffold({projectRoot, tests, packageName}))
       .toEqual(deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults));
+    expect(fs.writeFile).toHaveBeenCalledWith(
+      `${pathToCreatedSrcDirectory}/index.js`,
+      "export {default as scaffold} from './scaffolder.js';\n"
+    );
+    expect(fs.copyFile).toHaveBeenCalledWith(
+      resolve('templates/scaffolder.js'),
+      `${pathToCreatedSrcDirectory}/scaffolder.js`
+    );
   });
 });
