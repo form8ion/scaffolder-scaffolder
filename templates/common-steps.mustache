@@ -1,23 +1,27 @@
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-import {After, When} from '@cucumber/cucumber';
+import {After, Before When} from '@cucumber/cucumber';
 import stubbedFs from 'mock-fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));          // eslint-disable-line no-underscore-dangle
 const stubbedNodeModules = stubbedFs.load(resolve(__dirname, '..', '..', '..', '..', 'node_modules'));
+
+let scaffold;
+
+Before(function () {
+  // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
+  ({scaffold} = await import('{{{ packageName }}}'));
+
+  stubbedFs({
+    node_modules: stubbedNodeModules
+  });
+});
 
 After(function () {
   stubbedFs.restore();
 });
 
 When('the project is scaffolded', async function () {
-  // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
-  const {scaffold} = await import('{{{ packageName }}}');
-
-  stubbedFs({
-    node_modules: stubbedNodeModules
-  });
-
   await scaffold({projectRoot: process.cwd()});
 });
