@@ -1,6 +1,7 @@
 // #### Import
 // remark-usage-ignore-next
 import stubbedFs from 'mock-fs';
+import {dialects} from '@form8ion/javascript-core';
 import {scaffold} from './lib/index.mjs';
 
 // remark-usage-ignore-next 5
@@ -13,5 +14,5 @@ stubbedFs({
 // #### Execute
 
 (async () => {
-  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}});
+  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}, dialect: dialects.ESM});
 })();

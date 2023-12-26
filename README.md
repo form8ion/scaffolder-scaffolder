@@ -42,6 +42,7 @@ $ npm install @form8ion/scaffolder-scaffolder --save-prod
 #### Import
 
 ```javascript
+import {dialects} from '@form8ion/javascript-core';
 import {scaffold} from '@form8ion/scaffolder-scaffolder';
 ```
 
@@ -49,7 +50,7 @@ import {scaffold} from '@form8ion/scaffolder-scaffolder';
 
 ```javascript
 (async () => {
-  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}});
+  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}, dialect: dialects.ESM});
 })();
 ```
 
