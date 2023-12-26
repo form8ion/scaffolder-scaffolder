@@ -25,12 +25,13 @@ describe('scaffold', () => {
     const tests = {integration: any.boolean()};
     const projectRoot = any.string();
     const packageName = any.word();
+    const dialect = any.word();
     when(integrationTesting.default)
-      .calledWith({projectRoot, packageName, tests})
+      .calledWith({projectRoot, packageName, tests, dialect})
       .mockResolvedValue(integrationTestingResults);
     when(mkdir.default).calledWith(`${projectRoot}/src`).mockResolvedValue(pathToCreatedSrcDirectory);
 
-    expect(await scaffold({projectRoot, tests, packageName}))
+    expect(await scaffold({projectRoot, tests, packageName, dialect}))
       .toEqual(deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults));
     expect(fs.writeFile).toHaveBeenCalledWith(
       `${pathToCreatedSrcDirectory}/index.js`,

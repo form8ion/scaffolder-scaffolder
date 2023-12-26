@@ -12,7 +12,6 @@ Feature: Integration testing
     When the project is scaffolded
     Then cucumber will not be enabled
 
-  @wip
   Scenario: ESM project
     Given the scaffolded project will be integration tested
     And the project dialect is "esm"

@@ -5,11 +5,18 @@ import mkdir from 'make-dir';
 import deepmerge from 'deepmerge';
 import mustache from 'mustache';
 import filedirname from 'filedirname';
+import {dialects} from '@form8ion/javascript-core';
 import {scaffold as scaffoldCucumber} from '@form8ion/cucumber-scaffolder';
 
 const [, __dirname] = filedirname();
 
-export default async function ({projectRoot, packageName, tests: {integration}}) {
+function determineExtensionFor({dialect}) {
+  if (dialects.ESM === dialect) return 'js';
+
+  return 'mjs';
+}
+
+export default async function ({projectRoot, packageName, tests: {integration}, dialect}) {
   if (integration) {
     const [cucumberResults, createdFeaturesDirectory] = await Promise.all([
       scaffoldCucumber({projectRoot}),
@@ -19,7 +26,7 @@ export default async function ({projectRoot, packageName, tests: {integration}})
 
     await Promise.all([
       fs.writeFile(
-        `${createdStepsDirectory}/common-steps.mjs`,
+        `${createdStepsDirectory}/common-steps.${determineExtensionFor({dialect})}`,
         mustache.render(
           await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
           {packageName}

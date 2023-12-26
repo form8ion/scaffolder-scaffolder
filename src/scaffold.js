@@ -10,7 +10,7 @@ import scaffoldDocumentation from './documentation.js';
 
 const [, __dirname] = filedirname();
 
-export default async function ({projectRoot, packageName, tests}) {
+export default async function ({projectRoot, packageName, tests, dialect}) {
   const createdSrcDirectory = await mkdir(`${projectRoot}/src`);
 
   await Promise.all([
@@ -21,6 +21,6 @@ export default async function ({projectRoot, packageName, tests}) {
 
   return deepmerge(
     {devDependencies: ['mock-fs'], scripts: {}},
-    await scaffoldIntegrationTesting({projectRoot, packageName, tests})
+    await scaffoldIntegrationTesting({projectRoot, packageName, tests, dialect})
   );
 }
