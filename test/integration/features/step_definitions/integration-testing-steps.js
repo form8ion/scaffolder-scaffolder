@@ -7,6 +7,7 @@ import {Given, Then} from '@cucumber/cucumber';
 import {assert} from 'chai';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));      // eslint-disable-line no-underscore-dangle
+const pathToTemplates = [__dirname, '..', '..', '..', '..', 'templates'];
 
 Given('the scaffolded project will be integration tested', async function () {
   this.integrationTesting = true;
@@ -17,8 +18,6 @@ Given('the scaffolded project will not be integration tested', async function ()
 });
 
 Then('cucumber will be enabled', async function () {
-  const pathToTemplates = [__dirname, '..', '..', '..', '..', 'templates'];
-
   const {scripts, devDependencies} = this.results;
 
   assert.deepEqual(scripts['pretest:integration:base'], 'run-s build');
@@ -28,8 +27,11 @@ Then('cucumber will be enabled', async function () {
     await fs.readFile(`${process.cwd()}/test/integration/features/scaffolder.feature`, 'utf-8'),
     await fs.readFile(resolve(...pathToTemplates, 'scaffolder.feature'), 'utf8')
   );
+});
+
+Then('the step definitions use a {string} extension', async function (extension) {
   assert.equal(
-    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.mjs`, 'utf-8'),
+    await fs.readFile(`${process.cwd()}/test/integration/features/step_definitions/common-steps.${extension}`, 'utf-8'),
     (await fs.readFile(resolve(...pathToTemplates, 'common-steps.mustache'), 'utf8'))
       .replace('{{{ packageName }}}', this.packageName)
   );
