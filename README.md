@@ -102,7 +102,7 @@ $ npm test
 
 [coverage-link]: https://codecov.io/github/form8ion/scaffolder-scaffolder
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/form8ion/scaffolder-scaffolder.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/form8ion/scaffolder-scaffolder?logo=codecov
 
 [license-link]: LICENSE
 
@@ -110,7 +110,7 @@ $ npm test
 
 [npm-link]: https://www.npmjs.com/package/@form8ion/scaffolder-scaffolder
 
-[npm-badge]: https://img.shields.io/npm/v/@form8ion/scaffolder-scaffolder.svg
+[npm-badge]: https://img.shields.io/npm/v/@form8ion/scaffolder-scaffolder?logo=npm
 
 [runkit-link]: https://npm.runkit.com/@form8ion/scaffolder-scaffolder
 
