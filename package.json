@@ -23,7 +23,7 @@
     "generate:md": "remark . --output",
     "pregenerate:md": "run-s build",
     "lint:sensitive": "ban",
-    "lint:publish": "publint",
+    "lint:publish": "publint --strict",
     "clean": "rimraf ./lib",
     "prebuild": "run-s clean",
     "build": "npm-run-all --print-label --parallel build:*",
