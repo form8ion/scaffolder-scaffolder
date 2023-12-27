@@ -35,6 +35,7 @@ Then('the step definitions use a {string} extension', async function (extension)
     (await fs.readFile(resolve(...pathToTemplates, 'common-steps.mustache'), 'utf8'))
       .replace('{{{ packageName }}}', this.packageName)
   );
+  assert.isTrue(await fileExists(`${process.cwd()}/cucumber.${extension}`));
 });
 
 Then('cucumber will not be enabled', async function () {
