@@ -33,8 +33,8 @@ export default async function ({projectRoot, packageName, tests: {integration}, 
         )
       ),
       fs.copyFile(
-        resolve(__dirname, '..', 'templates', 'scaffolder.feature'),
-        `${createdFeaturesDirectory}/scaffolder.feature`
+        resolve(__dirname, '..', 'templates', 'scaffold.feature'),
+        `${createdFeaturesDirectory}/scaffold.feature`
       )
     ]);
 

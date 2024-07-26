@@ -53,8 +53,8 @@ describe('integration tests', () => {
       ));
     expect(fs.writeFile).toHaveBeenCalledWith(`${pathToCreatedStepsDirectory}/common-steps.mjs`, commonStepsContent);
     expect(fs.copyFile).toHaveBeenCalledWith(
-      resolve(__dirname, '..', 'templates', 'scaffolder.feature'),
-      `${pathToCreatedFeaturesDirectory}/scaffolder.feature`
+      resolve(__dirname, '..', 'templates', 'scaffold.feature'),
+      `${pathToCreatedFeaturesDirectory}/scaffold.feature`
     );
   });
 
