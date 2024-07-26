@@ -10,4 +10,6 @@ export default async function ({projectRoot}) {
     resolve(__dirname, '..', 'templates', 'example.js'),
     `${projectRoot}/example.js`
   );
+
+  return {devDependencies: ['mock-fs']};
 }

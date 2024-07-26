@@ -7,12 +7,14 @@ import {describe, it, expect, vi, afterEach} from 'vitest';
 import any from '@travi/any';
 import {when} from 'jest-when';
 
-import * as integrationTesting from './integration-testing.js';
+import scaffoldIntegrationTesting from './integration-testing.js';
+import scaffoldDocumentation from './documentation.js';
 import scaffold from './scaffold.js';
 
 vi.mock('node:fs');
 vi.mock('make-dir');
-vi.mock('./integration-testing');
+vi.mock('./integration-testing.js');
+vi.mock('./documentation.js');
 
 describe('scaffold', () => {
   afterEach(() => {
@@ -21,18 +23,20 @@ describe('scaffold', () => {
 
   it('should scaffold the form8ion plugin', async () => {
     const integrationTestingResults = any.simpleObject();
+    const documentationResults = any.simpleObject();
     const pathToCreatedSrcDirectory = any.string();
     const tests = {integration: any.boolean()};
     const projectRoot = any.string();
     const packageName = any.word();
     const dialect = any.word();
-    when(integrationTesting.default)
+    when(scaffoldIntegrationTesting)
       .calledWith({projectRoot, packageName, tests, dialect})
       .mockResolvedValue(integrationTestingResults);
+    when(scaffoldDocumentation).calledWith({projectRoot}).mockResolvedValue(documentationResults);
     when(mkdir.default).calledWith(`${projectRoot}/src`).mockResolvedValue(pathToCreatedSrcDirectory);
 
     expect(await scaffold({projectRoot, tests, packageName, dialect}))
-      .toEqual(deepmerge({devDependencies: ['mock-fs'], scripts: {}}, integrationTestingResults));
+      .toEqual(deepmerge(integrationTestingResults, documentationResults));
     expect(fs.writeFile).toHaveBeenCalledWith(
       `${pathToCreatedSrcDirectory}/index.js`,
       "export {default as scaffold} from './scaffolder.js';\n"

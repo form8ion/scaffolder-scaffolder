@@ -44,5 +44,5 @@ export default async function ({projectRoot, packageName, tests: {integration}, 
     );
   }
 
-  return {};
+  return {scripts: {}};
 }

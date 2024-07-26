@@ -16,8 +16,9 @@ describe('documentation', () => {
   it('should generate the example file', async () => {
     const projectRoot = any.string();
 
-    await scaffoldDocumentation({projectRoot});
+    const {devDependencies} = await scaffoldDocumentation({projectRoot});
 
+    expect(devDependencies).toEqual(['mock-fs']);
     expect(fs.copyFile).toHaveBeenCalledWith(
       resolve(__dirname, '..', 'templates', 'example.js'),
       `${projectRoot}/example.js`

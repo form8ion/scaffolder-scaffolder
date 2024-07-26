@@ -13,14 +13,12 @@ const [, __dirname] = filedirname();
 export default async function ({projectRoot, packageName, tests, dialect}) {
   const createdSrcDirectory = await mkdir(`${projectRoot}/src`);
 
-  await Promise.all([
+  const [documentationResults, integrationTestingResults] = await Promise.all([
     scaffoldDocumentation({projectRoot}),
+    scaffoldIntegrationTesting({projectRoot, packageName, tests, dialect}),
     fs.writeFile(`${createdSrcDirectory}/index.js`, "export {default as scaffold} from './scaffolder.js';\n"),
     fs.copyFile(resolve(__dirname, '..', 'templates', 'scaffolder.js'), `${createdSrcDirectory}/scaffolder.js`)
   ]);
 
-  return deepmerge(
-    {devDependencies: ['mock-fs'], scripts: {}},
-    await scaffoldIntegrationTesting({projectRoot, packageName, tests, dialect})
-  );
+  return deepmerge(documentationResults, integrationTestingResults);
 }
