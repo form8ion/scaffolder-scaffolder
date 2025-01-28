@@ -18,10 +18,10 @@ Given('the scaffolded project will not be integration tested', async function ()
 });
 
 Then('cucumber will be enabled', async function () {
-  const {scripts, devDependencies, dependencies} = this.results;
+  const {scripts, dependencies} = this.results;
 
   assert.deepEqual(scripts['pretest:integration:base'], 'run-s build');
-  assert.isTrue(devDependencies.includes('@cucumber/cucumber'));
+  assert.isTrue(dependencies.javascript.development.includes('@cucumber/cucumber'));
   assert.isTrue(dependencies.javascript.development.includes('mock-fs'));
   assert.equal(
     await fs.readFile(`${process.cwd()}/test/integration/features/scaffold.feature`, 'utf-8'),
@@ -43,7 +43,6 @@ Then('cucumber will not be enabled', async function () {
 
   assert.isUndefined(scripts['pretest:integration']);
   assert.isFalse(dependencies.javascript.development.includes('@cucumber/cucumber'));
-  assert.isFalse(dependencies.javascript.development.includes('package-preview'));
   assert.isFalse(await fileExists(`${process.cwd()}/test/integration/features/scaffolder.feature`));
   assert.isFalse(await fileExists(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`));
 });
