@@ -11,5 +11,5 @@ export default async function ({projectRoot}) {
     `${projectRoot}/example.js`
   );
 
-  return {devDependencies: ['mock-fs']};
+  return {dependencies: {javascript: {development: ['mock-fs']}}};
 }

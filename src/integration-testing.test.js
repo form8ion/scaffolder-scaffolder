@@ -48,7 +48,7 @@ describe('integration tests', () => {
 
     expect(await scaffold({projectRoot, packageName, tests: {integration: true}, dialect: dialects.BABEL}))
       .toEqual(deepmerge(
-        {scripts: {'pretest:integration:base': 'run-s build'}, devDependencies: ['mock-fs']},
+        {scripts: {'pretest:integration:base': 'run-s build'}, dependencies: {javascript: {development: ['mock-fs']}}},
         cucumberResults
       ));
     expect(fs.writeFile).toHaveBeenCalledWith(`${pathToCreatedStepsDirectory}/common-steps.mjs`, commonStepsContent);

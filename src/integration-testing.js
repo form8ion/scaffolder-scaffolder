@@ -39,7 +39,7 @@ export default async function ({projectRoot, packageName, tests: {integration}, 
     ]);
 
     return deepmerge(
-      {scripts: {'pretest:integration:base': 'run-s build'}, devDependencies: ['mock-fs']},
+      {scripts: {'pretest:integration:base': 'run-s build'}, dependencies: {javascript: {development: ['mock-fs']}}},
       cucumberResults
     );
   }

@@ -18,11 +18,11 @@ Given('the scaffolded project will not be integration tested', async function ()
 });
 
 Then('cucumber will be enabled', async function () {
-  const {scripts, devDependencies} = this.results;
+  const {scripts, devDependencies, dependencies} = this.results;
 
   assert.deepEqual(scripts['pretest:integration:base'], 'run-s build');
   assert.isTrue(devDependencies.includes('@cucumber/cucumber'));
-  assert.isTrue(devDependencies.includes('mock-fs'));
+  assert.isTrue(dependencies.javascript.development.includes('mock-fs'));
   assert.equal(
     await fs.readFile(`${process.cwd()}/test/integration/features/scaffold.feature`, 'utf-8'),
     await fs.readFile(resolve(...pathToTemplates, 'scaffold.feature'), 'utf8')
@@ -39,11 +39,11 @@ Then('the step definitions use a {string} extension', async function (extension)
 });
 
 Then('cucumber will not be enabled', async function () {
-  const {scripts, devDependencies} = this.results;
+  const {scripts, dependencies} = this.results;
 
   assert.isUndefined(scripts['pretest:integration']);
-  assert.isFalse(devDependencies.includes('cucumber'));
-  assert.isFalse(devDependencies.includes('package-preview'));
+  assert.isFalse(dependencies.javascript.development.includes('@cucumber/cucumber'));
+  assert.isFalse(dependencies.javascript.development.includes('package-preview'));
   assert.isFalse(await fileExists(`${process.cwd()}/test/integration/features/scaffolder.feature`));
   assert.isFalse(await fileExists(`${process.cwd()}/test/integration/features/step_definitions/common-steps.js`));
 });
