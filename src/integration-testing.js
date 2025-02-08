@@ -16,7 +16,7 @@ function determineExtensionFor({dialect}) {
   return 'mjs';
 }
 
-export default async function ({projectRoot, packageName, tests: {integration}, dialect}) {
+export default async function ({projectRoot, projectName, packageName, tests: {integration}, dialect}) {
   if (integration) {
     const [cucumberResults, createdFeaturesDirectory] = await Promise.all([
       scaffoldCucumber({projectRoot}),
@@ -30,6 +30,20 @@ export default async function ({projectRoot, packageName, tests: {integration}, 
         mustache.render(
           await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
           {packageName}
+        )
+      ),
+      fs.writeFile(
+        `${createdStepsDirectory}/form8ion-steps.${determineExtensionFor({dialect})}`,
+        mustache.render(
+          await fs.readFile(resolve(__dirname, '..', 'templates', 'form8ion-steps.mustache'), 'utf8'),
+          {packageName, projectName}
+        )
+      ),
+      fs.writeFile(
+        `${createdFeaturesDirectory}/form8ion.feature`,
+        mustache.render(
+          await fs.readFile(resolve(__dirname, '..', 'templates', 'form8ion-feature.mustache'), 'utf8'),
+          {projectName}
         )
       ),
       fs.copyFile(

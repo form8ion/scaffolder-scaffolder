@@ -51,7 +51,13 @@ import {scaffold} from '@form8ion/scaffolder-scaffolder';
 
 ```javascript
 (async () => {
-  await scaffold({projectRoot: process.cwd(), packageName: 'foo', tests: {integration: true}, dialect: dialects.ESM});
+  await scaffold({
+    projectRoot: process.cwd(),
+    projectName: 'bar',
+    packageName: '@foo/bar',
+    tests: {integration: true},
+    dialect: dialects.ESM
+  });
 })();
 ```
 

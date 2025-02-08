@@ -28,14 +28,15 @@ describe('scaffold', () => {
     const tests = {integration: any.boolean()};
     const projectRoot = any.string();
     const packageName = any.word();
+    const projectName = any.word();
     const dialect = any.word();
     when(scaffoldIntegrationTesting)
-      .calledWith({projectRoot, packageName, tests, dialect})
+      .calledWith({projectRoot, projectName, packageName, tests, dialect})
       .mockResolvedValue(integrationTestingResults);
     when(scaffoldDocumentation).calledWith({projectRoot}).mockResolvedValue(documentationResults);
     when(mkdir.default).calledWith(`${projectRoot}/src`).mockResolvedValue(pathToCreatedSrcDirectory);
 
-    expect(await scaffold({projectRoot, tests, packageName, dialect}))
+    expect(await scaffold({projectRoot, tests, projectName, packageName, dialect}))
       .toEqual(deepmerge(integrationTestingResults, documentationResults));
     expect(fs.writeFile).toHaveBeenCalledWith(
       `${pathToCreatedSrcDirectory}/index.js`,
