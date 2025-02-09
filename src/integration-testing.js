@@ -1,7 +1,6 @@
 import {promises as fs} from 'node:fs';
 import {resolve} from 'node:path';
 
-import mkdir from 'make-dir';
 import deepmerge from 'deepmerge';
 import mustache from 'mustache';
 import filedirname from 'filedirname';
@@ -18,29 +17,29 @@ function determineExtensionFor({dialect}) {
 
 export default async function ({projectRoot, projectName, packageName, tests: {integration}, dialect}) {
   if (integration) {
-    const [cucumberResults, createdFeaturesDirectory] = await Promise.all([
+    const [cucumberResults] = await Promise.all([
       scaffoldCucumber({projectRoot}),
-      mkdir(`${projectRoot}/test/integration/features`)
+      fs.mkdir(`${projectRoot}/test/integration/features`, {recursive: true})
     ]);
-    const createdStepsDirectory = await mkdir(`${createdFeaturesDirectory}/step_definitions`);
+    await fs.mkdir(`${projectRoot}/test/integration/features/step_definitions`, {recursive: true});
 
     await Promise.all([
       fs.writeFile(
-        `${createdStepsDirectory}/common-steps.${determineExtensionFor({dialect})}`,
+        `${projectRoot}/test/integration/features/step_definitions/common-steps.${determineExtensionFor({dialect})}`,
         mustache.render(
           await fs.readFile(resolve(__dirname, '..', 'templates', 'common-steps.mustache'), 'utf8'),
           {packageName}
         )
       ),
       fs.writeFile(
-        `${createdStepsDirectory}/form8ion-steps.${determineExtensionFor({dialect})}`,
+        `${projectRoot}/test/integration/features/step_definitions/form8ion-steps.${determineExtensionFor({dialect})}`,
         mustache.render(
           await fs.readFile(resolve(__dirname, '..', 'templates', 'form8ion-steps.mustache'), 'utf8'),
           {packageName, projectName}
         )
       ),
       fs.writeFile(
-        `${createdFeaturesDirectory}/form8ion.feature`,
+        `${projectRoot}/test/integration/features/form8ion.feature`,
         mustache.render(
           await fs.readFile(resolve(__dirname, '..', 'templates', 'form8ion-feature.mustache'), 'utf8'),
           {projectName}
@@ -48,7 +47,7 @@ export default async function ({projectRoot, projectName, packageName, tests: {i
       ),
       fs.copyFile(
         resolve(__dirname, '..', 'templates', 'scaffold.feature'),
-        `${createdFeaturesDirectory}/scaffold.feature`
+        `${projectRoot}/test/integration/features/scaffold.feature`
       )
     ]);
 
