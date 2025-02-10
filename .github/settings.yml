@@ -2,5 +2,5 @@ _extends: .github
 repository:
   name: scaffolder-scaffolder
   description: opinionated scaffolder for scaffolding scaffolder plugins
-  homepage: 'https://npm.im/@form8ion/scaffolder-scaffolder'
+  homepage: https://npm.im/@form8ion/scaffolder-scaffolder
   private: false

@@ -11,6 +11,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));        // eslint-disa
 const pathToProjectRoot = [__dirname, '../../../../'];
 
 Before(async function () {
+  this.projectRoot = process.cwd();
+
   stubbedFs({
     templates: stubbedFs.load(resolve(...pathToProjectRoot, 'templates')),
     node_modules: stubbedFs.load(resolve(...pathToProjectRoot, 'node_modules')),
@@ -24,9 +26,11 @@ After(function () {
 
 When('the project is scaffolded', async function () {
   this.packageName = `@${any.word()}/${any.word()}-${any.word()}`;
+  this.projectName = any.word();
 
   this.results = await scaffold({
-    projectRoot: process.cwd(),
+    projectRoot: this.projectRoot,
+    projectName: this.projectName,
     packageName: this.packageName,
     tests: {integration: this.integrationTesting},
     dialect: this.dialect

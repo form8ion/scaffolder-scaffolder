@@ -5,7 +5,7 @@
   "version": "0.0.0-semantically-released",
   "type": "module",
   "engines": {
-    "node": "^18.17 || >=20.6.1"
+    "node": "^18.19.0 || ^20.9.0 || >=22.11.0"
   },
   "author": "Matt Travi <npm@travi.org> (https://matt.travi.org/)",
   "repository": "form8ion/scaffolder-scaffolder",
@@ -17,7 +17,7 @@
   "sideEffects": false,
   "scripts": {
     "test": "npm-run-all --print-label build --parallel lint:* --parallel test:*",
-    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts npm",
+    "lint:lockfile": "lockfile-lint",
     "lint:js": "eslint . --cache",
     "lint:md": "remark . --frail",
     "generate:md": "remark . --output",
@@ -41,7 +41,8 @@
     "test:integration:wip": "run-s 'test:integration:base -- --profile wip'",
     "test:integration:focus": "run-s 'test:integration:base -- --profile focus'",
     "prepare": "husky install",
-    "lint:engines": "ls-engines"
+    "lint:engines": "ls-engines",
+    "lint:js:fix": "run-s 'lint:js -- --fix'"
   },
   "files": [
     "example.js",
@@ -52,16 +53,16 @@
     "access": "public",
     "provenance": true
   },
+  "packageManager": "npm@11.1.0+sha512.acf301ad9b9ddba948fcb72341e2f0fcae477f56a95cc2a092934d133a7461062633cefbf93d5934a3dc0768674e2edee9f04dcfcc4bb4c327ff0e3a7d552a1b",
   "dependencies": {
-    "@form8ion/cucumber-scaffolder": "4.0.0",
-    "@form8ion/javascript-core": "^11.0.0",
+    "@form8ion/cucumber-scaffolder": "^5.0.0-beta.2",
+    "@form8ion/javascript-core": "^12.0.0",
     "deepmerge": "^4.2.2",
     "filedirname": "^3.0.0",
-    "make-dir": "^4.0.0",
     "mustache": "^4.0.1"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "10.9.0",
+    "@cucumber/cucumber": "11.2.0",
     "@form8ion/commitlint-config": "2.0.4",
     "@form8ion/core": "4.8.0",
     "@form8ion/eslint-config": "7.0.12",
