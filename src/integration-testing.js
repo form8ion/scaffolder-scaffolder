@@ -57,5 +57,8 @@ export default async function ({projectRoot, projectName, packageName, tests: {i
     );
   }
 
-  return {scripts: {}};
+  return {
+    scripts: {},
+    dependencies: {javascript: {development: ['@form8ion/core']}}
+  };
 }

@@ -94,6 +94,9 @@ describe('integration tests', () => {
   });
 
   it('should not configure cucumber when the project should not be integration tested', async () => {
-    expect(await scaffold({tests: {integration: false}})).toEqual({scripts: {}});
+    expect(await scaffold({tests: {integration: false}})).toEqual({
+      scripts: {},
+      dependencies: {javascript: {development: ['@form8ion/core']}}
+    });
   });
 });
