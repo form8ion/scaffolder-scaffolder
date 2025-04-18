@@ -52,7 +52,10 @@ export default async function ({projectRoot, projectName, packageName, tests: {i
     ]);
 
     return deepmerge(
-      {scripts: {'pretest:integration:base': 'run-s build'}, dependencies: {javascript: {development: ['mock-fs']}}},
+      {
+        scripts: {'pretest:integration:base': 'run-s build'},
+        dependencies: {javascript: {development: ['mock-fs', '@form8ion/core']}}
+      },
       cucumberResults
     );
   }

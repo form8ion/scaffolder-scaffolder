@@ -55,7 +55,10 @@ describe('integration tests', () => {
 
     expect(await scaffold({projectRoot, projectName, packageName, tests: {integration: true}, dialect: dialects.BABEL}))
       .toEqual(deepmerge(
-        {scripts: {'pretest:integration:base': 'run-s build'}, dependencies: {javascript: {development: ['mock-fs']}}},
+        {
+          scripts: {'pretest:integration:base': 'run-s build'},
+          dependencies: {javascript: {development: ['mock-fs', '@form8ion/core']}}
+        },
         cucumberResults
       ));
     expect(fs.mkdir)
