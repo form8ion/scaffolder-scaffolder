@@ -23,6 +23,7 @@ Then('cucumber will be enabled', async function () {
   assert.deepEqual(scripts['pretest:integration:base'], 'run-s build');
   assert.isTrue(dependencies.javascript.development.includes('@cucumber/cucumber'));
   assert.isTrue(dependencies.javascript.development.includes('mock-fs'));
+  assert.isTrue(dependencies.javascript.development.includes('@form8ion/core'));
   assert.equal(
     await fs.readFile(`${this.projectRoot}/test/integration/features/scaffold.feature`, 'utf-8'),
     await fs.readFile(resolve(...pathToTemplates, 'scaffold.feature'), 'utf8')
@@ -60,6 +61,7 @@ Then('cucumber will not be enabled', async function () {
 
   assert.isUndefined(scripts['pretest:integration']);
   assert.isFalse(dependencies.javascript.development.includes('@cucumber/cucumber'));
+  assert.isFalse(dependencies.javascript.development.includes('@form8ion/core'));
   assert.isFalse(await fileExists(`${this.projectRoot}/test/integration/features/scaffolder.feature`));
   assert.isFalse(await fileExists(`${this.projectRoot}/test/integration/features/step_definitions/common-steps.js`));
 });
